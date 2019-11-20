@@ -1,0 +1,2 @@
+generate-db:
+	sqlboiler psql
