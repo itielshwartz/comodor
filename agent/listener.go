@@ -41,7 +41,7 @@ func (c *Client) listen() {
 		switch message.Cmd {
 		case resources.ListReleasesRequestCMD:
 			log.Info("Start getting releases")
-			respData, err = helm.ListReleases(helm.GetClient())
+			respData, err = helm.ListReleases(c.HelmClient)
 			log.Info(string("Done getting releases"))
 		default:
 			print("WTF")

@@ -568,7 +568,7 @@ func testReleasesSelect(t *testing.T) {
 }
 
 var (
-	releaseDBTypes = map[string]string{`RowID`: `integer`, `Name`: `text`, `Namespace`: `text`, `Cluster`: `text`, `Status`: `text`, `CreatedAt`: `date`, `Revision`: `integer`, `Schemaversion`: `integer`}
+	releaseDBTypes = map[string]string{`RowID`: `integer`, `Name`: `text`, `Namespace`: `text`, `Cluster`: `text`, `Status`: `text`, `CreatedAt`: `date`, `Revision`: `integer`, `SchemaVersion`: `integer`}
 	_              = bytes.MinRead
 )
 

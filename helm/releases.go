@@ -31,6 +31,6 @@ func newRelease(r *release.Release) *models.Release {
 		Status:        r.Info.Status.Code.String(),
 		CreatedAt:     *iproto.TimestampToTime(r.Info.FirstDeployed),
 		Revision:      null.IntFrom(int(r.Version)),
-		Schemaversion: null.IntFrom(1),
+		SchemaVersion: null.IntFrom(1),
 	}
 }

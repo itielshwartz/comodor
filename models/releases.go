@@ -31,7 +31,7 @@ type Release struct {
 	Status        string    `boil:"status" json:"status" toml:"status" yaml:"status"`
 	CreatedAt     time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	Revision      null.Int  `boil:"revision" json:"revision,omitempty" toml:"revision" yaml:"revision,omitempty"`
-	Schemaversion null.Int  `boil:"schemaversion" json:"schemaversion,omitempty" toml:"schemaversion" yaml:"schemaversion,omitempty"`
+	SchemaVersion null.Int  `boil:"schema_version" json:"schema_version,omitempty" toml:"schema_version" yaml:"schema_version,omitempty"`
 
 	R *releaseR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L releaseL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -45,7 +45,7 @@ var ReleaseColumns = struct {
 	Status        string
 	CreatedAt     string
 	Revision      string
-	Schemaversion string
+	SchemaVersion string
 }{
 	RowID:         "row_id",
 	Name:          "name",
@@ -54,7 +54,7 @@ var ReleaseColumns = struct {
 	Status:        "status",
 	CreatedAt:     "created_at",
 	Revision:      "revision",
-	Schemaversion: "schemaversion",
+	SchemaVersion: "schema_version",
 }
 
 // Generated where
@@ -143,7 +143,7 @@ var ReleaseWhere = struct {
 	Status        whereHelperstring
 	CreatedAt     whereHelpertime_Time
 	Revision      whereHelpernull_Int
-	Schemaversion whereHelpernull_Int
+	SchemaVersion whereHelpernull_Int
 }{
 	RowID:         whereHelperint{field: "\"comodor\".\"releases\".\"row_id\""},
 	Name:          whereHelperstring{field: "\"comodor\".\"releases\".\"name\""},
@@ -152,7 +152,7 @@ var ReleaseWhere = struct {
 	Status:        whereHelperstring{field: "\"comodor\".\"releases\".\"status\""},
 	CreatedAt:     whereHelpertime_Time{field: "\"comodor\".\"releases\".\"created_at\""},
 	Revision:      whereHelpernull_Int{field: "\"comodor\".\"releases\".\"revision\""},
-	Schemaversion: whereHelpernull_Int{field: "\"comodor\".\"releases\".\"schemaversion\""},
+	SchemaVersion: whereHelpernull_Int{field: "\"comodor\".\"releases\".\"schema_version\""},
 }
 
 // ReleaseRels is where relationship names are stored.
@@ -172,9 +172,9 @@ func (*releaseR) NewStruct() *releaseR {
 type releaseL struct{}
 
 var (
-	releaseAllColumns            = []string{"row_id", "name", "namespace", "cluster", "status", "created_at", "revision", "schemaversion"}
+	releaseAllColumns            = []string{"row_id", "name", "namespace", "cluster", "status", "created_at", "revision", "schema_version"}
 	releaseColumnsWithoutDefault = []string{"name", "namespace", "cluster", "status", "created_at", "revision"}
-	releaseColumnsWithDefault    = []string{"row_id", "schemaversion"}
+	releaseColumnsWithDefault    = []string{"row_id", "schema_version"}
 	releasePrimaryKeyColumns     = []string{"row_id"}
 )
 

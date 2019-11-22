@@ -5,9 +5,11 @@
 package main
 
 import (
+	"awesomeProject/helm"
 	"awesomeProject/kube"
 	log "github.com/sirupsen/logrus"
 	"k8s.io/client-go/kubernetes"
+	rawHelm "k8s.io/helm/pkg/helm"
 	"net/http"
 	"time"
 
@@ -38,7 +40,8 @@ type Client struct {
 	conn       *websocket.Conn
 	kubeClient *kubernetes.Clientset
 	// Buffered channel of outbound messages.
-	send chan []byte
+	send       chan []byte
+	HelmClient *rawHelm.Client
 }
 
 // writePump pumps messages from the hub to the websckt connection.
@@ -100,7 +103,7 @@ func main() {
 	c.SetReadDeadline(time.Now().Add(pongWait))
 	c.SetPongHandler(func(string) error { c.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	defer c.Close()
-	client := &Client{conn: c, send: make(chan []byte, 256), kubeClient: kube.GetClient()}
+	client := &Client{conn: c, send: make(chan []byte, 256), kubeClient: kube.GetClient(), HelmClient: helm.GetClient()}
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
 	go client.writePump()
