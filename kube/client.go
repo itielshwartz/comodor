@@ -63,7 +63,6 @@ func GetClient() *kubernetes.Clientset {
 			panic(err.Error())
 		}
 
-
 		// creates the clientset
 		client, err = kubernetes.NewForConfig(config)
 		if err != nil {

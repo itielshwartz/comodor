@@ -30,7 +30,7 @@ func (h *UserHandler) HandleUserRequest(w http.ResponseWriter, r *http.Request) 
 	cmd := mux.Vars(r)["command"]
 	switch cmd {
 	case "listpods":
-		resp, e = releasesHandler.HandleListReleaseRequest(r.Context(), "orgname");
+		resp, e = releasesHandler.HandleListReleaseRequest(r.Context(), "orgname")
 	default:
 		logrus.Error("Bad command!!")
 	}

@@ -7,4 +7,3 @@ const (
 	Agent     = "agent"
 	User      = "user"
 )
-
