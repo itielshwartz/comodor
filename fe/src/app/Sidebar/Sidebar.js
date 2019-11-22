@@ -29,11 +29,6 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
-  },
-  listItem: {
-    display: 'inline-flex', 
-    textDecoration: 'none',
-    color: 'rgba(0, 0, 0, 0.87)'
   }
 }));
 

@@ -8,16 +8,16 @@ import { Pipelines } from './pages/Pipelines/Pipelines';
 
 const hist = createBrowserHistory();
 
-export const App = () =>   (
-  <Router history={hist}>
-    <Sidebar />
-      <main>
-        <Switch>
-          <Route path="/releases" component={Releases} />
-          <Route path="/history" component={History} />
-          <Route path="/pipelines" component={Pipelines} />
-          <Redirect from="/" to="/releases" />
-        </Switch>
-      </main>
-  </Router>
-)
+export const App = () => {
+  return (
+    <Router history={hist}>
+      <Sidebar />
+      <Switch>
+        <Route path="/releases" component={Releases} />
+        <Route path="/history" component={History} />
+        <Route path="/pipelines" component={Pipelines} />
+        <Redirect from="/" to="/releases" />
+      </Switch>
+    </Router>
+  )
+}
