@@ -28,7 +28,7 @@ func newIpod(pod v1.Pod) *Ipod {
 func CreateIpodsList(list v1.PodList) []*Ipod {
 	l := len(list.Items)
 	Ipods := make([]*Ipod, l)
-	for i,item := range list.Items {
+	for i, item := range list.Items {
 		Ipods[i] = newIpod(item)
 	}
 	return Ipods
