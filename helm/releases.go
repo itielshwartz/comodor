@@ -3,16 +3,16 @@ package helm
 import (
 	"awesomeProject/iproto"
 	"awesomeProject/models"
+	"awesomeProject/resources"
 	"github.com/volatiletech/null"
-	"helm.sh/helm/pkg/helm"
+	"k8s.io/helm/pkg/helm"
 	"k8s.io/helm/pkg/proto/hapi/release"
 )
-import "encoding/json"
 
-func ListReleases(client *helm.Client) ([]byte, error) {
+func ListReleases(client *helm.Client) (*resources.ListReleasesResponse, error) {
 	rawReleases, err := client.ListReleases()
 	if err != nil {
-		return nil, err
+		return &resources.ListReleasesResponse{Data: nil}, err
 	}
 	l := len(rawReleases.Releases)
 	releases := make([]*models.Release, l)
@@ -20,7 +20,7 @@ func ListReleases(client *helm.Client) ([]byte, error) {
 		rls := newRelease(item)
 		releases[i] = rls
 	}
-	return json.Marshal(releases)
+	return &resources.ListReleasesResponse{Data: releases}, err
 }
 
 func newRelease(r *release.Release) *models.Release {

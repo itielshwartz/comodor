@@ -1,7 +1,7 @@
 package helm
 
 import (
-	"helm.sh/helm/pkg/helm"
+	"k8s.io/helm/pkg/helm"
 	"sync"
 )
 

@@ -1,10 +1,10 @@
 package main
 
 import (
+	"awesomeProject/communication"
 	"awesomeProject/helm"
-	"awesomeProject/iproto"
-	"awesomeProject/kube"
-	"github.com/golang/protobuf/proto"
+	"awesomeProject/resources"
+	"encoding/json"
 	"github.com/gorilla/websocket"
 	log "github.com/sirupsen/logrus"
 )
@@ -19,7 +19,7 @@ func (c *Client) listen() {
 	for {
 		log.Info(string("Waiting for msg"))
 		var err error
-		var resp []byte
+		var respData communication.ResponseData
 		_, rawMsg, err := c.conn.ReadMessage()
 		if rawMsg == nil {
 			// Happen when connection get closed
@@ -29,34 +29,37 @@ func (c *Client) listen() {
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Error("error: %v", err)
-				c.sendError <- err
 			}
 		}
-		message := &iproto.ServerToClientRequest{}
-		err = proto.Unmarshal(rawMsg, message)
+		var message communication.ServerToAgentRequest
+		err = json.Unmarshal(rawMsg, &message)
 		if err != nil {
-			c.sendError <- err
-
+			log.WithError(err).Error("Failed to marshal request")
+			continue
 		}
-		switch message.Request.(type) {
-		case *iproto.ServerToClientRequest_ListPodsInNamespace:
-			namespace := message.GetListPodsInNamespace()
-			log.Info("Start getting pods")
-			resp, err = kube.GetPods(c.kubeClient, namespace.Namespace)
-			log.Info(string("Done getting pods"))
-		case *iproto.ServerToClientRequest_ListCurrentHelmReleases:
+		resp := communication.NewAgentToServerResponse(nil, message.UUID, "")
+		switch message.Cmd {
+		case resources.ListReleasesRequestCMD:
 			log.Info("Start getting releases")
-			resp, err = helm.ListReleases(helm.GetClient())
+			respData, err = helm.ListReleases(helm.GetClient())
 			log.Info(string("Done getting releases"))
 		default:
 			print("WTF")
 			log.Print(message)
 		}
+		resp.ResponseData, err = json.Marshal(respData)
 		if err != nil {
-			log.Error(err)
-			c.sendError <- err
-		} else {
-			c.send <- resp
+			log.WithError(err).Error("Failed to marshal respData")
 		}
+		bytes, err := json.Marshal(resp)
+		if err != nil {
+			log.WithError(err).Error("Failed to marshal response")
+		}
+		if err != nil {
+			resp.Err = err.Error()
+
+		}
+
+		c.send <- bytes
 	}
 }
