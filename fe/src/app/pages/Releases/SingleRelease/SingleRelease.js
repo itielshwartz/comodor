@@ -83,7 +83,8 @@ const ReleaseDetails = ({ release }) => {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
+    marginTop: 16,
+    minWidth: '550px',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -105,8 +106,8 @@ export const ReleaseData = ( {release} ) =>  {
   };
 
   return (
-      <div style={{marginLeft: 300}} >
-        <div style={{marginLeft: 400}}>{`Release: ${release.name} ${release.namespace}`}</div>
+      <div style={{marginLeft: 16}} >
+        <h1>{`Release: ${release.name} (${release.namespace})`}</h1>
         <ReleaseDetails release={release} />
         <div className={classes.root}>
       <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>

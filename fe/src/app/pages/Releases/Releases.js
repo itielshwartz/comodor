@@ -20,6 +20,7 @@ const GET_RELEASES = gql`
     }
   }
 `;
+
 export const Releases = () =>  {
   const { loading, error, data } = useQuery(GET_RELEASES);
   const [ allReleases, setAllReleases ] = useState([])
@@ -45,6 +46,10 @@ export const Releases = () =>  {
     setVisibleReleases(filtered);
   }
 
+  function cardClicked(id) {
+    window.location.href = "releases/" + id;
+  }
+
   useEffect(() => {
     if (data) {
       setVisibleReleases(data.comodor_releases)
@@ -61,11 +66,12 @@ export const Releases = () =>  {
         <FilterBar onChange={filterChanged} />
         <div className="card-list box-h">
           {visibleReleases.map(r => 
-            (<Card key={r.row_id}>
+            (<Card key={r.row_id} onClick={cardClicked.bind(this, r.row_id)}>
               <CardContent>
                 <div className="release-cluster">{r.cluster}</div>
                 <div className="release-name">{r.name}</div>
                 <StatusIndicator status={r.status}/>
+                <div className="release-revision">#{r.revision}</div>
                 <div className="release-namespace">{r.namespace}</div>
               </CardContent>
             </Card>)

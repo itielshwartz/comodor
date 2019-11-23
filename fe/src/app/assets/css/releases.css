@@ -21,6 +21,13 @@
     border-radius: 100px;
 }
 
+.release-revision {
+	font-size: 12px;
+	color: #8a8a8a;
+	margin-top: 4px;
+	font-family: monospace;
+}
+
 .card-list .MuiPaper-root {
 	width: 140px;
 }
