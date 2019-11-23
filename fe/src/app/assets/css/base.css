@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+body {
+	padding: 0;
+	font-family: Rubic, sans-serif;
+	font-size: 14px;
+	background: #f6f9fb;
+}
+
+/* ===== Layout ===== */
+.box-h {
+	display: flex;
+	flex-direction: row;
+}
+.box-v {
+	display: flex;
+	flex-direction: column;
+}
+.box-c {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.box-wrap { flex-wrap: wrap; }
+.box-csb { justify-content: space-between; }
+.box-cc { justify-content: center; }
+.box-ic { align-items: center; }
+
+ul { padding: 0; }

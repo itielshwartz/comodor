@@ -4,10 +4,13 @@ import { App } from './app/App';
 import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { apolloClient } from './apolloClient';
+import "./app/assets/css/base.css";
 
 const AppWithBenefits = () => (
     <ApolloProvider client={apolloClient}>
-        <App />
+    <div className="app" style={{display:'flex'}}>
+	    <App style={{display:'flex'}} />
+    </div>
     </ApolloProvider>
 )
 
