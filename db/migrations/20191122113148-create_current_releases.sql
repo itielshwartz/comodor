@@ -10,7 +10,7 @@ create table comodor.releases
     cluster        text   not null,
     status         text   not null,
     created_at     date   not null,
-    revision       integer,
+    revision       integer not null,
     schema_version integer default '-1'::integer
 );
 
@@ -28,6 +28,9 @@ create table comodor.services
 	row_id serial not null
 		constraint services_pk
 			primary key,
+    unique_release_name text not null,
+    unique_release_namespace text not null,
+    unique_release_revision integer not null,
 	name text not null,
 	type text not null,
 	cluster_ip text not null,
@@ -36,11 +39,29 @@ create table comodor.services
 	created_at date not null
 );
 
+create table comodor.deployments
+(
+	row_id serial not null
+		constraint deployments_pk
+			primary key,
+    unique_release_name text not null,
+    unique_release_namespace text not null,
+    unique_release_revision integer not null,
+	name text not null,
+	ready integer not null,
+	total integer not null,
+	available integer,
+	created_at date not null
+);
+
 create table comodor.pods
 (
 	row_id serial not null
 		constraint pods_pk
 			primary key,
+    unique_release_name text not null,
+    unique_release_namespace text not null,
+    unique_release_revision integer not null,
 	name text not null,
 	ready integer,
 	total integer,
@@ -54,6 +75,9 @@ create table comodor.statefulsets
 	row_id serial not null
 		constraint statefulsets_pk
 			primary key,
+    unique_release_name text not null,
+    unique_release_namespace text not null,
+    unique_release_revision integer not null,
 	name text not null,
 	ready integer,
 	total integer,
