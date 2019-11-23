@@ -70,6 +70,22 @@ create table comodor.pods
 	created_at date not null
 );
 
+create table comodor.app_history
+(
+    row_id serial not null
+        constraint app_history_pk
+            primary key,
+    release_name text not null,
+    release_namespace text not null,
+    release_cluster text not null,
+    release_revision integer not null,
+    updated date not null,
+    status text not null,
+    chart text not null,
+    app_version text not null,
+    description text not null
+);
+
 create table comodor.statefulsets
 (
 	row_id serial not null

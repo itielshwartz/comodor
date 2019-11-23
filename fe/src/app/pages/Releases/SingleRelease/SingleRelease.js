@@ -13,6 +13,7 @@ import { Services } from './Services/Services';
 import { Deployments } from './Deployments/Deployments';
 import { StatefulSets } from './StatefulSets/StatefulSets';
 import { Pods } from './Pods/Pods';
+import { History } from './History/History';
 
 const GET_RELEASE = id => gql`
   {
@@ -120,7 +121,7 @@ export const ReleaseData = ( {release} ) =>  {
           <Services release={release} />
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+      <ExpansionPanel expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2bh-content"
@@ -132,7 +133,7 @@ export const ReleaseData = ( {release} ) =>  {
           <Deployments release={release} />
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+      <ExpansionPanel expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3bh-content"
@@ -144,7 +145,7 @@ export const ReleaseData = ( {release} ) =>  {
           <Pods release={release} />
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+      <ExpansionPanel expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3bh-content"
@@ -154,6 +155,18 @@ export const ReleaseData = ( {release} ) =>  {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <StatefulSets release={release} />
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel3bh-content"
+          id="panel3bh-header"
+        >
+          <Typography className={classes.heading}>History</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <History release={release} />
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
