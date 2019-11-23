@@ -5,6 +5,7 @@ import { Sidebar } from './Sidebar/Sidebar';
 import { Releases } from './pages/Releases/Releases';
 import { History } from './pages/History/History';
 import { Pipelines } from './pages/Pipelines/Pipelines';
+import { SingleRelease } from './pages/Releases/SingleRelease/SingleRelease';
 
 const hist = createBrowserHistory();
 
@@ -13,6 +14,7 @@ export const App = () =>   (
     <Sidebar />
       <main>
         <Switch>
+          <Route path="/releases/:id" component={SingleRelease} />
           <Route path="/releases" component={Releases} />
           <Route path="/history" component={History} />
           <Route path="/pipelines" component={Pipelines} />
