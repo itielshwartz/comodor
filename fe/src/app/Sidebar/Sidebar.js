@@ -7,7 +7,7 @@ import {  NavLink } from "react-router-dom";
 import { ListItemIcon, ListItemText } from '@material-ui/core';
 import MailIcon from '@material-ui/icons/Mail';
 
-const drawerWidth = 260;
+const drawerWidth = 220;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,21 +45,21 @@ export const Sidebar = () => {
         }}
         anchor="left"
       >
-        <div className={classes.toolbar} style={{textAlign: 'center', marginTop: 20, minHeight: 20, color: 'darkcyan', fontSize: 20, fontWeight: 'bold'}}>
-          Komodor.io
+        <div style={{margin: '16px', color: 'darkcyan', fontSize: 22, fontWeight: 'bold'}}>
+          Komodor
         </div>
-        <List>
-          <ListItem key="releases" component={NavLink} to="/releases" className={classes.listItem}>
-              <ListItemIcon><MailIcon /></ListItemIcon>
-              <ListItemText primary="Releases" />
+        <List style={{padding: 0}}>
+          <ListItem key="releases" component={NavLink} to="/releases" className={classes.listItem} style={{paddingTop: 4, paddingBottom: 4}}>
+              <ListItemIcon style={{minWidth: 36}}><MailIcon /></ListItemIcon>
+              <ListItemText primary="Releases" style={{fontSize: 14}} />
           </ListItem>
-          <ListItem button key="history"  component={NavLink} to="/history" className={classes.listItem}>
-              <ListItemIcon><MailIcon /></ListItemIcon>
-              <ListItemText primary="History" />
+          <ListItem button key="history"  component={NavLink} to="/history" className={classes.listItem} style={{paddingTop: 4, paddingBottom: 4}}>
+              <ListItemIcon style={{minWidth: 36}}><MailIcon /></ListItemIcon>
+              <ListItemText primary="History" style={{fontSize: 14}} />
           </ListItem>
-          <ListItem button key="pipelines" component={NavLink} to="/pipelines" className={classes.listItem}>
-              <ListItemIcon><MailIcon /></ListItemIcon>
-              <ListItemText primary="Pipelines" />
+          <ListItem button key="pipelines" component={NavLink} to="/pipelines" className={classes.listItem} style={{paddingTop: 4, paddingBottom: 4}}>
+              <ListItemIcon style={{minWidth: 36}}><MailIcon /></ListItemIcon>
+              <ListItemText primary="Pipelines" style={{fontSize: 14}} />
           </ListItem>
        </List>
       </Drawer>

@@ -106,7 +106,7 @@ export const ReleaseData = ( {release} ) =>  {
   };
 
   return (
-      <div style={{marginLeft: 16}} >
+      <div style={{padding: 24}} >
         <h1>{`Release: ${release.name} (${release.namespace})`}</h1>
         <ReleaseDetails release={release} />
         <div className={classes.root}>
