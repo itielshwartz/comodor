@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Card from '@material-ui/core/Card';
@@ -20,10 +20,37 @@ const GET_RELEASES = gql`
     }
   }
 `;
-
 export const Releases = () =>  {
-
   const { loading, error, data } = useQuery(GET_RELEASES);
+  const [ allReleases, setAllReleases ] = useState([])
+  const [ visibleReleases, setVisibleReleases ] = useState([])
+
+  function filterChanged(filters) {
+    var filtered = allReleases;
+
+    filtered = filtered.filter((item) => {
+      var isValid = true;
+
+      for (var i in filters) {
+        let filter = filters[i].value.split("_"),
+          field = filter[0],
+          value = filter[1];
+        
+        isValid = isValid && item[field] === value
+      }
+
+      return isValid;
+    });
+
+    setVisibleReleases(filtered);
+  }
+
+  useEffect(() => {
+    if (data) {
+      setVisibleReleases(data.comodor_releases)
+      setAllReleases(data.comodor_releases)
+    }
+  }, [data])
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
@@ -31,9 +58,9 @@ export const Releases = () =>  {
   return (
       <div style={{padding: 24}} >
         <h1>Releases</h1>
-        <FilterBar />
+        <FilterBar onChange={filterChanged} />
         <div className="card-list box-h">
-          {data.comodor_releases.map(r => 
+          {visibleReleases.map(r => 
             (<Card key={r.row_id}>
               <CardContent>
                 <div className="release-cluster">{r.cluster}</div>

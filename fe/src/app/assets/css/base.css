@@ -26,4 +26,7 @@ body {
 .box-cc { justify-content: center; }
 .box-ic { align-items: center; }
 
-ul { padding: 0; }
+ul {
+	margin: 0;
+	padding: 0;
+}
